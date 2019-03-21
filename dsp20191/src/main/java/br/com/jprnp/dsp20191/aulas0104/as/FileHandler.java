@@ -1,4 +1,4 @@
-package br.com.jprnp.as01.aulas0104.as;
+package br.com.jprnp.dsp20191.aulas0104.as;
 
 import java.io.*;
 
