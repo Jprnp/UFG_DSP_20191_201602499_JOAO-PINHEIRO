@@ -30,9 +30,8 @@ public class XmlHandler {
             student.setLastName(node.selectSingleNode("./lastname").getText());
             student.setNickName(node.selectSingleNode("./nickname").getText());
 
-            Node frequenciaNode = node.selectSingleNode("./frequencia");
             Frequencia frequencia = new Frequencia();
-            List<Node> aulaNodeList = frequenciaNode.selectNodes("./aulas");
+            List<Node> aulaNodeList = node.selectSingleNode("./frequencia").selectNodes("./aulas");
             aulaNodeList.forEach(aula -> frequencia.addFrequencia(aula.valueOf("@numero"), aula.getText()));
             student.setFrequencia(frequencia);
 

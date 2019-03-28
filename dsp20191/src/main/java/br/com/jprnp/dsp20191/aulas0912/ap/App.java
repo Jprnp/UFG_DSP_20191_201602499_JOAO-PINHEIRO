@@ -1,10 +1,7 @@
 package br.com.jprnp.dsp20191.aulas0912.ap;
 
-import org.dom4j.Document;
 import org.dom4j.DocumentException;
-import org.dom4j.io.SAXReader;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class App {
