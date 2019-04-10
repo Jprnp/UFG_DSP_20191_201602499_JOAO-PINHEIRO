@@ -1,0 +1,111 @@
+package br.com.jprnp.dsp20191.aulas1316.ap;
+
+import br.com.jprnp.dsp20191.aulas1316.ap.persistencia.ddl.CreateCargo;
+import br.com.jprnp.dsp20191.aulas1316.ap.persistencia.ddl.CreateDepartamento;
+import br.com.jprnp.dsp20191.aulas1316.ap.persistencia.ddl.CreateFuncionario;
+import br.com.jprnp.dsp20191.aulas1316.ap.persistencia.ddl.CreateLotacao;
+import br.com.jprnp.dsp20191.aulas1316.ap.persistencia.dml.ManterCargo;
+import br.com.jprnp.dsp20191.aulas1316.ap.persistencia.dml.ManterDepartamento;
+import br.com.jprnp.dsp20191.aulas1316.ap.persistencia.dml.ManterFuncionario;
+import br.com.jprnp.dsp20191.aulas1316.ap.persistencia.dml.ManterLotacao;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
+public class App {
+    public static void main(String[] args) {
+        try {
+            criaTabelas();
+            ArrayList<Cargo> cargos = insertCargos();
+            ArrayList<Departamento> departamentos = insertDepartamentos();
+            ArrayList<Funcionario> funcionarios = insertFuncionarios();
+            insertLotacoes(cargos, departamentos, funcionarios);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void criaTabelas() throws Exception {
+        (new CreateCargo()).criarTabela();
+        (new CreateDepartamento()).criarTabela();
+        (new CreateFuncionario()).criarTabela();
+        (new CreateLotacao()).criarTabela();
+    }
+
+    private static ArrayList<Cargo> insertCargos() throws Exception {
+        ManterCargo manterCargo = new ManterCargo();
+        ArrayList<Cargo> lista = new ArrayList<>();
+
+        long id = 0;
+        lista.add(new Cargo(++id, "Engenheiro de Software", 4000.00));
+        lista.add(new Cargo(++id, "Analista de Testes", 3400.00));
+        lista.add(new Cargo(++id, "Suporte", 3000.00));
+
+        for (Cargo l : lista) {
+            manterCargo.insert(l);
+        }
+
+        return lista;
+    }
+
+    private static ArrayList<Departamento> insertDepartamentos() throws Exception {
+        ManterDepartamento manterDepartamento = new ManterDepartamento();
+        ArrayList<Departamento> lista = new ArrayList<>();
+
+        long id = 0;
+        lista.add(new Departamento(++id, "Desenvolvimento"));
+        lista.add(new Departamento(++id, "Qualidade"));
+        lista.add(new Departamento(++id, "Suporte"));
+        lista.add(new Departamento(++id, "Recursos Humanos"));
+
+        for (Departamento l : lista) {
+            manterDepartamento.insert(l);
+        }
+
+        return lista;
+    }
+
+    private static ArrayList<Funcionario> insertFuncionarios() throws Exception {
+        ManterFuncionario manterFuncionario = new ManterFuncionario();
+        ArrayList<Funcionario> lista = new ArrayList<>();
+
+        long id = 0;
+        lista.add(new Funcionario(++id, "Funcionario 1", 1));
+        lista.add(new Funcionario(++id, "Funcionario 2", 2));
+        lista.add(new Funcionario(++id, "Funcionario 3", 3));
+        lista.add(new Funcionario(++id, "Funcionario 4", 4));
+        lista.add(new Funcionario(++id, "Funcionario 5", 5));
+        lista.add(new Funcionario(++id, "Funcionario 6", 6));
+        lista.add(new Funcionario(++id, "Funcionario 7", 7));
+        lista.add(new Funcionario(++id, "Funcionario 8", 8));
+        lista.add(new Funcionario(++id, "Funcionario 9", 9));
+        lista.add(new Funcionario(++id, "Funcionario 10", 10));
+
+        for (Funcionario l : lista) {
+            manterFuncionario.insert(l);
+        }
+
+        return lista;
+    }
+
+    private static void insertLotacoes(ArrayList<Cargo> c, ArrayList<Departamento> d, ArrayList<Funcionario> f) throws Exception {
+        /*ManterLotacao manterLotacao = new ManterLotacao();
+        long id = 0;
+        Cargo cargo;
+        Departamento departamento;
+        Funcionario funcionario;
+        Lotacao lotacao;
+        Calendar dataIni;
+        Calendar dataFim;
+
+        cargo = c.get(0);
+        departamento = d.get(0);
+        funcionario = f.get(0);
+        dataIni = Calendar.getInstance();
+        dataIni.set(2019, 1, 1);
+        dataFim = Calendar.getInstance();
+        dataFim.set(2019, 1, 30);
+        lotacao = new Lotacao(++id, dataIni.getTime(), dataFim.getTime(), cargo, departamento);*/
+    }
+}
