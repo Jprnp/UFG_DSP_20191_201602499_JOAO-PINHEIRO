@@ -14,13 +14,17 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class App {
+    private static ArrayList<Cargo> cargos;
+    private static ArrayList<Departamento> departamentos;
+    private static ArrayList<Funcionario> funcionarios;
+
     public static void main(String[] args) {
         try {
             criaTabelas();
-            ArrayList<Cargo> cargos = insertCargos();
-            ArrayList<Departamento> departamentos = insertDepartamentos();
-            ArrayList<Funcionario> funcionarios = insertFuncionarios();
-            insertLotacoes(cargos, departamentos, funcionarios);
+            cargos = insertCargos();
+            departamentos = insertDepartamentos();
+            funcionarios = insertFuncionarios();
+            insertLotacoes();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -57,7 +61,7 @@ public class App {
         lista.add(new Departamento(++id, "Desenvolvimento"));
         lista.add(new Departamento(++id, "Qualidade"));
         lista.add(new Departamento(++id, "Suporte"));
-        lista.add(new Departamento(++id, "Recursos Humanos"));
+        lista.add(new Departamento(++id, "Comercial"));
 
         for (Departamento l : lista) {
             manterDepartamento.insert(l);
@@ -89,23 +93,35 @@ public class App {
         return lista;
     }
 
-    private static void insertLotacoes(ArrayList<Cargo> c, ArrayList<Departamento> d, ArrayList<Funcionario> f) throws Exception {
-        /*ManterLotacao manterLotacao = new ManterLotacao();
+    private static void insertLotacoes() throws Exception {
         long id = 0;
+        insertLotacao(++id, 0, 0, 0);
+        insertLotacao(++id, 0, 0, 1);
+        insertLotacao(++id, 0, 0, 2);
+        insertLotacao(++id, 0, 0, 3);
+        insertLotacao(++id, 1, 1, 4);
+        insertLotacao(++id, 1, 2, 5);
+        insertLotacao(++id, 1, 1, 6);
+        insertLotacao(++id, 2, 3, 7);
+        insertLotacao(++id, 2, 3, 8);
+        insertLotacao(++id, 2, 3, 9);
+    }
+
+    private static void insertLotacao(long id, int indexCargo, int indexDepartamento, int indexFuncionario) throws Exception {
+        ManterLotacao manterLotacao = new ManterLotacao();
         Cargo cargo;
         Departamento departamento;
         Funcionario funcionario;
-        Lotacao lotacao;
         Calendar dataIni;
         Calendar dataFim;
 
-        cargo = c.get(0);
-        departamento = d.get(0);
-        funcionario = f.get(0);
+        cargo = cargos.get(indexCargo);
+        departamento = departamentos.get(indexDepartamento);
+        funcionario = funcionarios.get(indexFuncionario);
         dataIni = Calendar.getInstance();
         dataIni.set(2019, 1, 1);
         dataFim = Calendar.getInstance();
         dataFim.set(2019, 1, 30);
-        lotacao = new Lotacao(++id, dataIni.getTime(), dataFim.getTime(), cargo, departamento);*/
+        manterLotacao.insert(new Lotacao(id, dataIni.getTime(), dataFim.getTime(), cargo, departamento, funcionario));
     }
 }
